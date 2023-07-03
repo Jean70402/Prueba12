@@ -9,16 +9,31 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+  background-color: #03876f;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+header .img-1 {
+  margin-right: 10px;
+}
+
+header img {
+  width: 50px; /* Ajusta el ancho de la imagen según tus necesidades */
+  height: auto; /* Permite mantener la proporción de aspecto */
+}
+
+header h1 {
+  margin: 0;
+  flex: 1; 
 }
 
 nav {
-    background-color: #666;
+    background-color: #03876f ;
     color: #fff;
-    padding: 10px;
+    padding: 1px;
 }
 
 nav ul {
@@ -26,31 +41,38 @@ nav ul {
     margin: 0;
     padding: 0;
 }
-<!-- style img-->
-<style>
+
+
 .upper-img{
-    display: flex;
+  display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 .upper-img img{
-    max-width: 20%;
-    max-height: 20%;
+  width: 200px;
+  max-height: 200px;
+  display: block;
 }
 .upper-img>div{
-    flex: 1;
-    border-radius: 1rem;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    transition: all .8s cubic-bezier(.25,.4,.45,1.4);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  transition: all .8s cubic-bezier(.25,.4,.45,1.4);
 }
 .upper-img >div:hover{
-    flex:5;
+  flex:5;
 }
-.upper-img:hover{
-    animation: AnimImg1 2s ease 0s 1 normal forwards; 
+.upper-img .img-3:hover img {
+  animation: AnimImg1 1s ease 0s 1 normal forwards; 
+}
+.upper-img .img-2:hover img {
+  animation: AnimImg1 1s ease 0s 1 normal forwards; 
+}
+.upper-img .img-1:hover img {
+  animation: AnimImg1 1s ease 0s 1 normal forwards; 
 }
 @keyframes AnimImg1 {
     0%,
@@ -79,9 +101,9 @@ nav ul {
         transform: translateX(-6px) rotate(-1.2deg);
     }
 }
-</style>
+
 nav ul li {
-    display: inline;
+    display: inline-block;
     margin-right: 10px;
 }
 
@@ -95,7 +117,7 @@ section {
 }
 
 footer {
-    background-color: #333;
+    background-color: #03876f;
     color: #fff;
     padding: 10px;
     text-align: center;
