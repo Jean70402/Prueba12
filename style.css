@@ -90,6 +90,7 @@ nav ul {
   bottom: 0;
   opacity: 1;
   visibility: visible;
+  border-radius: 14%;
 }
 .upper-img .caption button {
   background-color: #ffffffd2;
