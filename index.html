@@ -118,7 +118,7 @@
       document.getElementById("horario1Count").textContent =
         "Inscritos en horario 1:Cupos llenos";
       // Deshabilitar el envío del formulario
-      subscribeForm.setAttribute("disabled", "true");
+      //subscribeForm.setAttribute("disabled", "true");
     }
   });
   horario2Ref.on("value", function (snapshot) {
@@ -132,7 +132,7 @@
       document.getElementById("horario2Count").textContent =
         "Inscritos en horario 2:Cupos llenos";
       // Deshabilitar el envío del formulario
-      subscribeForm.setAttribute("disabled", "true");
+      //subscribeForm.setAttribute("disabled", "true");
     }
   });
   horario3Ref.on("value", function (snapshot) {
@@ -142,7 +142,7 @@
       document.getElementById("horario3Count").textContent =
         "Inscritos en horario 3: " + count3+"/"+LimitCount;
       // Habilitar el envío del formulario
-      subscribeForm.removeAttribute("disabled");
+      //subscribeForm.removeAttribute("disabled");
     } else {
       document.getElementById("horario3Count").textContent =
         "Inscritos en horario 3: Cupos llenos";
@@ -165,10 +165,26 @@
       email.trim() !== "" &&
       nombre.trim() !== "" &&
       carrera.trim() !== "" &&
-      horario.trim() !== "" &&
-      count<=LimitCount
+      horario.trim() !== "" 
+      //&& count<=LimitCount
     ) {
-      if(horario==="primero"){
+      if (horario === "primero" && count > LimitCount) {
+    alert("Los cupos para Horario 1 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
+    return;
+  } else if (horario === "segundo" && count2 > LimitCount) {
+    alert("Los cupos para Horario 2 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
+    return;
+  } else if (horario === "tercero" && count3 > LimitCount) {
+    alert("Los cupos para Horario 3 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
+    return;
+  }
+  if ((horario === "primero" && count > LimitCount) || 
+      (horario === "segundo" && count2 > LimitCount) || 
+      (horario === "tercero" && count3 > LimitCount)) {
+    subscribeForm.querySelector('button[type="submit"]').setAttribute("disabled", "true");
+  }
+
+      if(horario==="primero" && count <= LimitCount){
       // Añadir todos los campos a la base de datos en una sola inserción
        horario1Ref.push().set({
         email: email,
@@ -177,7 +193,7 @@
         horario: horario
       });
       }
-      else if(horario==="segundo"){
+      else if(horario==="segundo" && count2 <= LimitCount){
       // Añadir todos los campos a la base de datos en una sola inserción
        horario2Ref.push().set({
         email: email,
@@ -186,7 +202,7 @@
         horario: horario
       });
       }
-      else if(horario==="tercero"){
+      else if(horario==="tercero" && count3 <= LimitCount){
       // Añadir todos los campos a la base de datos en una sola inserción
        horario3Ref.push().set({
         email: email,
@@ -200,12 +216,16 @@
       document.getElementById("nombre").value = "";
       document.getElementById("carrera").value = "";
       document.getElementById("horario").value = "";
-    } else {
+    } 
+   
+    else {
       alert("Completa todos los campos antes de enviar el formulario.");
     }
     location.reload();
   });
 </script>
+
+  
       </div>
     <section>
         <h2>Acerca de</h2>
