@@ -87,48 +87,63 @@
   };
   const app = firebase.initializeApp(firebaseConfig);
 
-
-
   // Referencia a la ubicación del contador en Firebase Realtime Database
   var subscribersRef = firebase.database().ref("subscribers");
 
   // Manejar el envío del formulario
-  document.getElementById("subscribeForm").addEventListener("submit", function (event) {
-    event.preventDefault();
-    
-    var email = document.getElementById("email").value;
-    var nombre= document.getElementById("nombre").value;
-    var carrera= document.getElementById("carrera").value;
-    var horario=document.getElementById("horario").value;
+  var subscribeForm = document.getElementById("subscribeForm");
 
-    
-  // Verificar si todos los campos están completos
-  if (email.trim() !== "" && nombre.trim() !== "" && carrera.trim() !== "" && horario.trim() !== ""
-  && count<=30) {
-    // Añadir todos los campos a la base de datos en una sola inserción
-    subscribersRef.push().set({
-      email: email,
-      nombre: nombre,
-      carrera: carrera,
-      horario: horario
-    });
-
-    // Limpiar los campos después de enviar
-    document.getElementById("email").value = "";
-    document.getElementById("nombre").value = "";
-    document.getElementById("carrera").value = "";
-    document.getElementById("horario").value = "";
-  }
-  location.reload();
-  });
+  // Definir la variable count en un alcance más alto
+  var count = 0;
 
   // Mostrar el contador en tiempo real
   subscribersRef.on("value", function (snapshot) {
-    var count = (snapshot.numChildren());
-    if(count<=30){
-    document.getElementById("subscriberCount").textContent = "Número de inscritos: " + count;
+    count = snapshot.numChildren();
+    if (count <= 30) {
+      document.getElementById("subscriberCount").textContent =
+        "Número de inscritos: " + count;
+      // Habilitar el envío del formulario
+      subscribeForm.removeAttribute("disabled");
+    } else {
+      document.getElementById("subscriberCount").textContent =
+        "Cupos llenos";
+      // Deshabilitar el envío del formulario
+      subscribeForm.setAttribute("disabled", "true");
     }
-    else(document.getElementById("subscriberCount").textContent = "Cupos llenos")
+  });
+
+  // Manejar el envío del formulario
+  subscribeForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var email = document.getElementById("email").value;
+    var nombre = document.getElementById("nombre").value;
+    var carrera = document.getElementById("carrera").value;
+    var horario = document.getElementById("horario").value;
+
+    // Verificar si todos los campos están completos
+    if (
+      email.trim() !== "" &&
+      nombre.trim() !== "" &&
+      carrera.trim() !== "" &&
+      horario.trim() !== ""
+    ) {
+      // Añadir todos los campos a la base de datos en una sola inserción
+      subscribersRef.push().set({
+        email: email,
+        nombre: nombre,
+        carrera: carrera,
+        horario: horario
+      });
+
+      // Limpiar los campos después de enviar
+      document.getElementById("email").value = "";
+      document.getElementById("nombre").value = "";
+      document.getElementById("carrera").value = "";
+      document.getElementById("horario").value = "";
+    } else {
+      alert("Completa todos los campos antes de enviar el formulario.");
+    }
   });
 </script>
 
