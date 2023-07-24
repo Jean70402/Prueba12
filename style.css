@@ -252,12 +252,44 @@ form {
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
   color: #ffffff;
-  text-decoration:double;
+  text-decoration: double;
   text-shadow: #000000;
+  line-height: 50px;
+  position: relative;
+  background-image: url("2.jpg"); /* Asegúrate de que la ruta de la imagen sea correcta */
+  background-size: cover;
+  background-position: center;
+  font-size: 18px;
+  color: #ffffff; /* Color del texto */
+  text-shadow: 
+    -2px -2px 0 #000, /* Sombra superior izquierda (color negro) */
+    2px -2px 0 #000,  /* Sombra superior derecha (color negro) */
+    -2px 2px 0 #000,  /* Sombra inferior izquierda (color negro) */
+    2px 2px 0 #000;
 }
+
+button {
+  background-color: #3dbe84; /* Color de fondo predeterminado */
+  color: #ffffff; /* Color de texto predeterminado */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #f44336; /* Nuevo color de fondo cuando se presiona */
+}
+
+
+
+
+
+
+
 #subscriberCount {
   max-width: 400px;
   margin: 0 auto;
@@ -267,4 +299,12 @@ form {
   color: #ffffff;
   text-decoration:double;
   text-shadow: #000000;
+  font-size: 18px;
+  color: #ffffff; /* Color del texto */
+  text-shadow: 
+    -2px -2px 0 #000, /* Sombra superior izquierda (color negro) */
+    2px -2px 0 #000,  /* Sombra superior derecha (color negro) */
+    -2px 2px 0 #000,  /* Sombra inferior izquierda (color negro) */
+    2px 2px 0 #000;
+
 }
