@@ -57,11 +57,11 @@
   <input type="text" id="carrera" placeholder="Tu carrera" required>
   <p></p>
   <label for="primero">Horario 1:</label>
-  <input type="radio" name="Horario" value="primero" id="horario">
+  <input type="radio" name="Horario" value="primero" id="horario1">
   <label for="segundo">Horario 2:</label>
-  <input type="radio" name="Horario" value="segundo" id="horario">
+  <input type="radio" name="Horario" value="segundo" id="horario2">
   <label for="tercero">Horario 3:</label>
-  <input type="radio" name="Horario" value="tercero" id="horario">
+  <input type="radio" name="Horario" value="tercero" id="horario3">
   
   <p></p>
   <label for="email">Correo: </label>
@@ -71,7 +71,11 @@
 </form>
 
 <!-- Agrega el contador -->
-<div id="subscriberCount">Cargando contador...</div>
+<div class="contadores">
+<div id="horario1Count">Cargando contador de Horario 1...</div>
+<div id="horario2Count">Cargando contador de Horario 2...</div>
+<div id="horario3Count">Cargando contador de Horario 3...</div>
+</div>
 
 <script>
   // Inicializa Firebase
@@ -88,24 +92,56 @@
   const app = firebase.initializeApp(firebaseConfig);
 
   // Referencia a la ubicación del contador en Firebase Realtime Database
-  var subscribersRef = firebase.database().ref("subscribers");
-
+  var  horario1Ref = firebase.database().ref("subscribers/horario1Count");
+  var horario2Ref = firebase.database().ref("subscribers/horario2Count");
+  var horario3Ref = firebase.database().ref("subscribers/horario3Count");
   // Manejar el envío del formulario
   var subscribeForm = document.getElementById("subscribeForm");
 
   // Definir la variable count en un alcance más alto
-  var count = 0;
+  var count=0;
+  var count2=0;
+  var count3=0;
+  var LimitCount=28;
 
   // Mostrar el contador en tiempo real
-  subscribersRef.on("value", function (snapshot) {
+   horario1Ref.on("value", function (snapshot) {
     count = snapshot.numChildren();
-    if (count <= 30) {
-      document.getElementById("subscriberCount").textContent =
-        "Número de inscritos: " + count;
+    if (count <= LimitCount) {
+      document.getElementById("horario1Count").textContent =
+        "Número de inscritos: " + count +"/"+LimitCount;
       // Habilitar el envío del formulario
       subscribeForm.removeAttribute("disabled");
     } else {
-      document.getElementById("subscriberCount").textContent =
+      document.getElementById("horario1Count").textContent =
+        "Cupos llenos";
+      // Deshabilitar el envío del formulario
+      subscribeForm.setAttribute("disabled", "true");
+    }
+  });
+  horario2Ref.on("value", function (snapshot) {
+    count2 = snapshot.numChildren();
+    if (count2 <= LimitCount) {
+      document.getElementById("horario2Count").textContent =
+        "Número de inscritos: " + count2+"/"+LimitCount;
+      // Habilitar el envío del formulario
+      subscribeForm.removeAttribute("disabled");
+    } else {
+      document.getElementById("horario2Count").textContent =
+        "Cupos llenos";
+      // Deshabilitar el envío del formulario
+      subscribeForm.setAttribute("disabled", "true");
+    }
+  });
+  horario3Ref.on("value", function (snapshot) {
+    count3 = snapshot.numChildren();
+    if (count3 <= LimitCount) {
+      document.getElementById("horario3Count").textContent =
+        "Número de inscritos: " + count3+"/"+LimitCount;
+      // Habilitar el envío del formulario
+      subscribeForm.removeAttribute("disabled");
+    } else {
+      document.getElementById("horario3Count").textContent =
         "Cupos llenos";
       // Deshabilitar el envío del formulario
       subscribeForm.setAttribute("disabled", "true");
@@ -119,23 +155,43 @@
     var email = document.getElementById("email").value;
     var nombre = document.getElementById("nombre").value;
     var carrera = document.getElementById("carrera").value;
-    var horario = document.getElementById("horario").value;
+    var horario = document.querySelector('input[name="Horario"]:checked').value;
 
     // Verificar si todos los campos están completos
     if (
       email.trim() !== "" &&
       nombre.trim() !== "" &&
       carrera.trim() !== "" &&
-      horario.trim() !== ""
+      horario.trim() !== "" &&
+      count<=LimitCount
     ) {
+      if(horario==="primero"){
       // Añadir todos los campos a la base de datos en una sola inserción
-      subscribersRef.push().set({
+       horario1Ref.push().set({
         email: email,
         nombre: nombre,
         carrera: carrera,
         horario: horario
       });
-
+      }
+      else if(horario==="segundo"){
+      // Añadir todos los campos a la base de datos en una sola inserción
+       horario2Ref.push().set({
+        email: email,
+        nombre: nombre,
+        carrera: carrera,
+        horario: horario
+      });
+      }
+      else if(horario==="tercero"){
+      // Añadir todos los campos a la base de datos en una sola inserción
+       horario3Ref.push().set({
+        email: email,
+        nombre: nombre,
+        carrera: carrera,
+        horario: horario
+      });
+      }
       // Limpiar los campos después de enviar
       document.getElementById("email").value = "";
       document.getElementById("nombre").value = "";
@@ -147,8 +203,6 @@
     location.reload();
   });
 </script>
-
-
       </div>
     <section>
         <h2>Acerca de</h2>
