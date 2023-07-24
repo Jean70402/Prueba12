@@ -265,10 +265,10 @@ form {
   font-size: 18px;
   color: #ffffff; /* Color del texto */
   text-shadow: 
-    -2px -2px 0 #000, /* Sombra superior izquierda (color negro) */
-    2px -2px 0 #000,  /* Sombra superior derecha (color negro) */
-    -2px 2px 0 #000,  /* Sombra inferior izquierda (color negro) */
-    2px 2px 0 #000;
+    -2px -2px 0 #4e4e4e, /* Sombra superior izquierda (color negro) */
+    2px -2px 0 #4e4e4e,  /* Sombra superior derecha (color negro) */
+    -2px 2px 0 #4e4e4e,  /* Sombra inferior izquierda (color negro) */
+    2px 2px 0 #4e4e4e;
 }
 
 button {
@@ -285,11 +285,6 @@ button:active {
 }
 
 
-
-
-
-
-
 #subscriberCount {
   max-width: 400px;
   margin: 0 auto;
@@ -301,10 +296,6 @@ button:active {
   text-shadow: #000000;
   font-size: 18px;
   color: #ffffff; /* Color del texto */
-  text-shadow: 
-    -2px -2px 0 #000, /* Sombra superior izquierda (color negro) */
-    2px -2px 0 #000,  /* Sombra superior derecha (color negro) */
-    -2px 2px 0 #000,  /* Sombra inferior izquierda (color negro) */
-    2px 2px 0 #000;
+  
 
 }
