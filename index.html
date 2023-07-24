@@ -73,7 +73,9 @@
 <!-- Agrega el contador -->
 <div class="contadores">
 <div id="horario1Count">Cargando contador de Horario 1...</div>
+<p></p>
 <div id="horario2Count">Cargando contador de Horario 2...</div>
+<p></p>
 <div id="horario3Count">Cargando contador de Horario 3...</div>
 </div>
 
@@ -109,12 +111,12 @@
     count = snapshot.numChildren();
     if (count <= LimitCount) {
       document.getElementById("horario1Count").textContent =
-        "Número de inscritos: " + count +"/"+LimitCount;
+        "Inscritos en horario 1: " + count +"/"+LimitCount;
       // Habilitar el envío del formulario
       subscribeForm.removeAttribute("disabled");
     } else {
       document.getElementById("horario1Count").textContent =
-        "Cupos llenos";
+        "Inscritos en horario 1:Cupos llenos";
       // Deshabilitar el envío del formulario
       subscribeForm.setAttribute("disabled", "true");
     }
@@ -123,26 +125,27 @@
     count2 = snapshot.numChildren();
     if (count2 <= LimitCount) {
       document.getElementById("horario2Count").textContent =
-        "Número de inscritos: " + count2+"/"+LimitCount;
+        "Inscritos en horario 2: " + count2+"/"+LimitCount;
       // Habilitar el envío del formulario
       subscribeForm.removeAttribute("disabled");
     } else {
       document.getElementById("horario2Count").textContent =
-        "Cupos llenos";
+        "Inscritos en horario 2:Cupos llenos";
       // Deshabilitar el envío del formulario
       subscribeForm.setAttribute("disabled", "true");
     }
   });
   horario3Ref.on("value", function (snapshot) {
-    count3 = snapshot.numChildren();
+    //count3 = snapshot.numChildren();
+    count3 = 31
     if (count3 <= LimitCount) {
       document.getElementById("horario3Count").textContent =
-        "Número de inscritos: " + count3+"/"+LimitCount;
+        "Inscritos en horario 3: " + count3+"/"+LimitCount;
       // Habilitar el envío del formulario
       subscribeForm.removeAttribute("disabled");
     } else {
       document.getElementById("horario3Count").textContent =
-        "Cupos llenos";
+        "Inscritos en horario 3: Cupos llenos";
       // Deshabilitar el envío del formulario
       subscribeForm.setAttribute("disabled", "true");
     }
