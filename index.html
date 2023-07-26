@@ -137,7 +137,7 @@
   });
   horario3Ref.on("value", function (snapshot) {
     //count3 = snapshot.numChildren();
-    count3 = 31
+    count3 = snapshot.numChildren();
     if (count3 <= LimitCount) {
       document.getElementById("horario3Count").textContent =
         "Inscritos en horario 3: " + count3+"/"+LimitCount;
