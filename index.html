@@ -1,276 +1,102 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Mi página web</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+  <title>Mi página web</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
 </head>
+
 <body>
-    <header>
-        <div class="img-1">
-            <img src="logo.png" alt="Descripción de la imagen" >
-        </div>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Acerca de</a></li>
-            <li><a href="#">Servicios</a></li>
-            <li><a href="#">Contacto</a></li>
-        </ul>
-    </nav>
-
-    <div class="upper-img">
-        <div class="img-1">
-          <img src="1.jpg" alt="Descripción de la imagen">
-          <div class="caption">
-            <p>Fotos</p>
-            <button>Ver  más!</button>
-          </div>
-        </div>
-        <div class="img-2">
-          <img width="400" src="4.jpg" alt="Descripción de la imagen">
-          <div class="caption">
-            <p>Videos</p>
-            <button>Ver  más!</button>
-          </div>
-        </div>
-        <div class="img-3">
-          <img width="400" src="3.jpg" alt="Descripción de la imagen">
-          <div class="caption">
-            <p>Actores</p>
-            <button>Ver  más!</button>
-          </div>
-        </div>
+  <header>
+    <div class="img-1">
+      <img src="logo.png" alt="Descripción de la imagen">
+    </div>
+  </header>
+  <div class="titulo">
+    <h1>Estación Luciernaga</h1>
+  </div>
+  <div class="upper-img">
+    <div class="img-1">
+      <img src="noveno/ensayo/9.jpg" alt="Descripción de la imagen">
+      <div class="caption">
+        <p>Ensayos</p>
+        <a href="Fotos.html">
+          <button>Ver más!</button>
+        </a>
       </div>
-      
-      <div>
-        <!-- Agrega el formulario -->
-<form id="subscribeForm">
-  <label for="nombre">Nombre: </label>
-  <input type="text" id="nombre" placeholder="Tu nombre" required>
-  <p></p>
-  <label for="carrera">Carrera  : </label>
-  <input type="text" id="carrera" placeholder="Tu carrera" required>
-  <p></p>
-  <label for="primero">Horario 1:</label>
-  <input type="radio" name="Horario" value="primero" id="horario1">
-  <label for="segundo">Horario 2:</label>
-  <input type="radio" name="Horario" value="segundo" id="horario2">
-  <label for="tercero">Horario 3:</label>
-  <input type="radio" name="Horario" value="tercero" id="horario3">
-  
-  <p></p>
-  <label for="email">Correo: </label>
-  <input type="email" id="email" placeholder="Tu correo electrónico" required>
-  <p></p>
-  <button type="submit">Enviar</button>
-</form>
-
-<!-- Agrega el contador -->
-<div class="contadores">
-<div id="horario1Count">Cargando contador de Horario 1...</div>
-<p></p>
-<div id="horario2Count">Cargando contador de Horario 2...</div>
-<p></p>
-<div id="horario3Count">Cargando contador de Horario 3...</div>
-</div>
-
-<script>
-  // Inicializa Firebase
-    const firebaseConfig = {
-    apiKey: "AIzaSyAUKjav9A7foqkSBvMmfh3TgF5CczBBQnM",
-    authDomain: "viewart-c6099.firebaseapp.com",
-    databaseURL: "https://viewart-c6099-default-rtdb.firebaseio.com",
-    projectId: "viewart-c6099",
-    storageBucket: "viewart-c6099.appspot.com",
-    messagingSenderId: "529881475475",
-    appId: "1:529881475475:web:e072f99e94de3fe7cf2066",
-    measurementId: "G-N6LD91DPEZ"
-  };
-  const app = firebase.initializeApp(firebaseConfig);
-
-  // Referencia a la ubicación del contador en Firebase Realtime Database
-  var  horario1Ref = firebase.database().ref("subscribers/horario1Count");
-  var horario2Ref = firebase.database().ref("subscribers/horario2Count");
-  var horario3Ref = firebase.database().ref("subscribers/horario3Count");
-  // Manejar el envío del formulario
-  var subscribeForm = document.getElementById("subscribeForm");
-
-  // Definir la variable count en un alcance más alto
-  var count=0;
-  var count2=0;
-  var count3=0;
-  var LimitCount=28;
-
-  // Mostrar el contador en tiempo real
-   horario1Ref.on("value", function (snapshot) {
-    count = snapshot.numChildren();
-    if (count <= LimitCount) {
-      document.getElementById("horario1Count").textContent =
-        "Inscritos en horario 1: " + count +"/"+LimitCount;
-      // Habilitar el envío del formulario
-      subscribeForm.removeAttribute("disabled");
-    } else {
-      document.getElementById("horario1Count").textContent =
-        "Inscritos en horario 1:Cupos llenos";
-      // Deshabilitar el envío del formulario
-      //subscribeForm.setAttribute("disabled", "true");
-    }
-  });
-  horario2Ref.on("value", function (snapshot) {
-    count2 = snapshot.numChildren();
-    if (count2 <= LimitCount) {
-      document.getElementById("horario2Count").textContent =
-        "Inscritos en horario 2: " + count2+"/"+LimitCount;
-      // Habilitar el envío del formulario
-      subscribeForm.removeAttribute("disabled");
-    } else {
-      document.getElementById("horario2Count").textContent =
-        "Inscritos en horario 2:Cupos llenos";
-      // Deshabilitar el envío del formulario
-      //subscribeForm.setAttribute("disabled", "true");
-    }
-  });
-  horario3Ref.on("value", function (snapshot) {
-    //count3 = snapshot.numChildren();
-    count3 = snapshot.numChildren();
-    if (count3 <= LimitCount) {
-      document.getElementById("horario3Count").textContent =
-        "Inscritos en horario 3: " + count3+"/"+LimitCount;
-      // Habilitar el envío del formulario
-      //subscribeForm.removeAttribute("disabled");
-    } else {
-      document.getElementById("horario3Count").textContent =
-        "Inscritos en horario 3: Cupos llenos";
-      // Deshabilitar el envío del formulario
-      subscribeForm.setAttribute("disabled", "true");
-    }
-  });
-
-  // Manejar el envío del formulario
-  subscribeForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    var email = document.getElementById("email").value;
-    var nombre = document.getElementById("nombre").value;
-    var carrera = document.getElementById("carrera").value;
-    var horario = document.querySelector('input[name="Horario"]:checked').value;
-
-    // Verificar si todos los campos están completos
-    if (
-      email.trim() !== "" &&
-      nombre.trim() !== "" &&
-      carrera.trim() !== "" &&
-      horario.trim() !== "" 
-      //&& count<=LimitCount
-    ) {
-      if (horario === "primero" && count > LimitCount) {
-    alert("Los cupos para Horario 1 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
-    return;
-  } else if (horario === "segundo" && count2 > LimitCount) {
-    alert("Los cupos para Horario 2 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
-    return;
-  } else if (horario === "tercero" && count3 > LimitCount) {
-    alert("Los cupos para Horario 3 están llenos. Por favor, elige otro horario o inténtalo más tarde.");
-    return;
-  }
-  if ((horario === "primero" && count > LimitCount) || 
-      (horario === "segundo" && count2 > LimitCount) || 
-      (horario === "tercero" && count3 > LimitCount)) {
-    subscribeForm.querySelector('button[type="submit"]').setAttribute("disabled", "true");
-  }
-
-      if(horario==="primero" && count <= LimitCount){
-      // Añadir todos los campos a la base de datos en una sola inserción
-       horario1Ref.push().set({
-        email: email,
-        nombre: nombre,
-        carrera: carrera,
-        horario: horario
-      });
-      }
-      else if(horario==="segundo" && count2 <= LimitCount){
-      // Añadir todos los campos a la base de datos en una sola inserción
-       horario2Ref.push().set({
-        email: email,
-        nombre: nombre,
-        carrera: carrera,
-        horario: horario
-      });
-      }
-      else if(horario==="tercero" && count3 <= LimitCount){
-      // Añadir todos los campos a la base de datos en una sola inserción
-       horario3Ref.push().set({
-        email: email,
-        nombre: nombre,
-        carrera: carrera,
-        horario: horario
-      });
-      }
-      // Limpiar los campos después de enviar
-      document.getElementById("email").value = "";
-      document.getElementById("nombre").value = "";
-      document.getElementById("carrera").value = "";
-      document.getElementById("horario").value = "";
-    } 
-   
-    else {
-      alert("Completa todos los campos antes de enviar el formulario.");
-    }
-    location.reload();
-  });
-</script>
-
-  
+    </div>
+    <div class="img-2">
+      <img width="400" src="noveno/activacion/9.jpg" alt="Descripción de la imagen">
+      <div class="caption">
+        <p>Activación</p>
+        <a href="Activacion.html">
+        <button>Ver más!</button>
+      </a>
       </div>
-    <section>
-        <h2>Acerca de</h2>
-        <p>Somos ViewArt Uce</p>
-    </section>
-    
-    <section>
-        <h2>Información adicional</h2>
-        <ul>
-            <li>Información 1</li>
-            <li>Información 2</li>
-            <li>Información 3</li>
-        </ul>
-    </section>
-    <div class="wrapper">
-         <div class="button">
-            <div class="icon">
-                <a href="https://www.facebook.com/profile.php?id=100093685544547&mibextid=ZbWKwL" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            </div>
-            <span>
-                <a href="https://www.facebook.com/profile.php?id=100093685544547&mibextid=ZbWKwL" target="_blank">Facebook</a>
-                </span>
-         </div>
-         <div class="button">
-            <div class="icon">
-                <a href="https://www.instagram.com/viewart_uce/?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank">
-               <i class="fab fa-instagram"></i>
-            </a>
-            </div>
-            <span><a href="https://www.instagram.com/viewart_uce/?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank">Instagram</a></span>
-         </div>
-         <div class="button">
-            <div class="icon">
-                <a href="https://www.tiktok.com/@viewartuce?_t=8dfytqmgajg&_r=1" target="_blank">
-               <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            <span><a href="https://www.tiktok.com/@viewartuce?_t=8dfytqmgajg&_r=1" target="_blank">TikTok</a></span>
-         </div>
+    </div>
+    <div class="img-3">
+      <img width="400" src="noveno/perfiles/4.jpg" alt="Descripción de la imagen">
+      <div class="caption">
+        <p>Actores</p>
+        <a href="Actores.html">
+        <button>Ver más!</button>
+      </a>
       </div>
-      
-    <footer>
-        <p>Derechos de autor &copy; 2023 Elaborado por Doménica Buitrón</p>
-    </footer>
+    </div>
+  </div>
+
+  <div>
+
+  </div>
+  <section>
+    <h2>Acerca de</h2>
+    <p>Somos ViewArt Uce</p>
+  </section>
+
+  <section>
+    <h2>Información adicional</h2>
+    <ul>
+      <li>Información 1</li>
+      <li>Información 2</li>
+      <li>Información 3</li>
+    </ul>
+  </section>
+  <div class="wrapper">
+    <div class="button">
+      <div class="icon">
+        <a href="https://www.facebook.com/profile.php?id=100093685544547&mibextid=ZbWKwL" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </div>
+      <span>
+        <a href="https://www.facebook.com/profile.php?id=100093685544547&mibextid=ZbWKwL" target="_blank">Facebook</a>
+      </span>
+    </div>
+    <div class="button">
+      <div class="icon">
+        <a href="https://www.instagram.com/viewart_uce/?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+      <span><a href="https://www.instagram.com/viewart_uce/?igshid=MzRlODBiNWFlZA%3D%3D"
+          target="_blank">Instagram</a></span>
+    </div>
+    <div class="button">
+      <div class="icon">
+        <a href="https://www.tiktok.com/@viewartuce?_t=8dfytqmgajg&_r=1" target="_blank">
+          <i class="fab fa-tiktok"></i>
+        </a>
+      </div>
+      <span><a href="https://www.tiktok.com/@viewartuce?_t=8dfytqmgajg&_r=1" target="_blank">TikTok</a></span>
+    </div>
+  </div>
+
+  <footer>
+    <p>Derechos de autor &copy; 2023 Elaborado por Doménica Buitrón</p>
+  </footer>
 </body>
+
 </html>

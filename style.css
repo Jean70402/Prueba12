@@ -1,19 +1,29 @@
 /* Estilos para la página web */
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Princess+Sofia&display=swap');
+
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #03876f;
     margin: 0;
     padding: 0;
     justify-content: center;
 }
 
 header {
-
-  color: #03876f;
+  color: #b80f09;
   padding: 20px;
 }
+.titulo{
+    font-family: 'Stylish', sans-serif;
+    text-shadow: #000000;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    color:#d1dad9
+    
+}
+
 header img {
   display: block;
   width: 30%;
@@ -23,7 +33,7 @@ header img {
 
 
 nav {
-    background-color: #03876f ;
+    background-color: #3fbfa7 ;
     color: #03876f;
     padding: 1px;
     border-radius: 20px;
@@ -160,6 +170,7 @@ footer {
 }
 h1 {
     text-shadow: 5px 5px 5px #000000;
+    
 }
 
 *{
@@ -173,7 +184,7 @@ html,body{
   height: 100%;
   width: 100%;
   place-items: center;
-  background: linear-gradient(315deg, #03876f 0%, #09a88b 74%);
+  background: linear-gradient(315deg, #7b0202 0%, #082142 74%);
 }
 .wrapper .button{
   display: inline-block;
