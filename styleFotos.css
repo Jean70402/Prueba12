@@ -41,11 +41,18 @@ section {
   transition: all 1s;
   border: 1px solid rgba(222, 222, 222, 0.544);
   box-shadow: 0 4px 8px 0 rgba(8, 7, 7, 0.343);
+  opacity: 1;
+  transition: all 1s;
+
+}
+img{
+  opacity: 1;
+  transition: all 1s;
 }
 
 .image-container {
   position: relative;
-  transition: all 1s;
+  transition: all 1.5s;
 }
 
 .Ensayos {
@@ -54,10 +61,26 @@ section {
 }
 
 .image-container:hover img{
-  opacity:.3s;
+  opacity: .7;
   transform: scale(.9,.9);
 }
 
+.image-container:hover i::after{
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+  content: attr(title);
+  position: absolute;
+  top: 80%;
+  right: 50%;
+  animation-name: text;
+  animation-duration: 1.5s;
+
+}
+
+@keyframes text {
+  from{right:60%}
+  to{right:50%}
+}
 h1{
     justify-content: center;
     align-items: center;
