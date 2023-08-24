@@ -306,6 +306,7 @@ button:active {
   text-decoration:double;
   text-shadow: #000000;
   font-size: 18px;
-  color: #ffffff; /* Color del texto */
+  color: #f5f5f5; /* Color del texto */
   
+
 }
